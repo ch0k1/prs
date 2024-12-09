@@ -1,0 +1,44 @@
+<div class="game-container">
+    <h1>Paper Rock Scissors</h1>
+  
+    <!-- Game Mode Selection -->
+    <div class="game-modes" *ngIf="!gameMode">
+      <button (click)="startGame(GameMode.PlayerVsComputer)">Player Vs Computer</button>
+      <button (click)="startGame(GameMode.ComputerVsComputer)">Computer Vs Computer</button>
+    </div>
+  
+    <!-- Player vs Computer Mode -->
+    <div class="player-vs-computer" *ngIf="gameMode === GameMode.PlayerVsComputer">
+      <h2>Player Vs Computer</h2>
+      <div class="choices">
+        <button *ngFor="let choice of choices" (click)="playPlayerVsComputer(choice)">
+          {{ choice }}
+        </button>
+      </div>
+      <div class="result" *ngIf="userChoice">
+        <p>Your Choice: {{ userChoice }}</p>
+        <p>Computer's Choice: {{ computerChoice }}</p>
+        <h2>{{ result }}</h2>
+      </div>
+    </div>
+  
+    <!-- Computer vs Computer Mode -->
+    <div class="computer-vs-computer" *ngIf="gameMode === GameMode.ComputerVsComputer">
+      <h2>Computer Vs Computer</h2>
+      <button (click)="playComputerVsComputer()">Play</button>
+      <div class="result" *ngIf="computerChoice && computerChoice2">
+        <p>Computer 1: {{ computerChoice }}</p>
+        <p>Computer 2: {{ computerChoice2 }}</p>
+        <h2>{{ result }}</h2>
+      </div>
+    </div>
+  
+    <!-- Score and Restart -->
+    <div class="scoreboard" *ngIf="gameMode">
+      <h3>Scoreboard</h3>
+      <p>Games Played: {{ gamesPlayed }}</p>
+      <p>Player 1: {{ userScore }}</p>
+      <p>Player 2: {{ computerScore }}</p>
+      <button *ngIf="gamesPlayed" (click)="restartGame()">Restart Game</button>
+    </div>
+  </div>
